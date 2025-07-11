@@ -102,4 +102,11 @@ jobs:
         env:
           webhook_url: 'https://dev-next-media.g.kuroco.app/direct/menu/github/'
           webhook_secret: 'de396df5ef2cadeccd5e053c2975a9f0'
-          data: '{"single_zip":"1","domain":"dev-next-media.g.kuroco-front.app",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
+          data: |
+            {
+              "single_zip": "1",
+              "domain": "dev-next-media.g.kuroco-front.app",
+              "repository": "diverta/front_next_media",
+              "run_id": "${{ github.run_id }}",
+              "hash": "${{ github.sha }}"
+            }
