@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write",
-    "generate": "next build && next export"
+    "generate": "next build"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
