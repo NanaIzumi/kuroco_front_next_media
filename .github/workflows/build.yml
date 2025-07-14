@@ -31,7 +31,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '18.x'
       - name: CI Cache
         uses: actions/cache@v4
         id: node_modules_cache_id
@@ -46,10 +46,8 @@ jobs:
 
       - name: Generate
         run: npm run generate
-      - name: Check build output directory
-        run: ls -la
       - name: Zip artifact for upload
-        run: zip -r dist.zip out
+        run: cd ./.output/public && zip ../../dist.zip . -r
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -63,15 +61,7 @@ jobs:
         env:
           webhook_url: "https://nizumi4.g.kuroco.app/direct/menu/github/"
           webhook_secret: "29680b1acbfc05837863f84cb6f7e7fd"
-          data: >
-            {
-              "single_zip": "1",
-              "domain": "nizumi4.g.kuroco-front.app",
-              "pr": "${{ github.event.issue.pull_request.url }}",
-              "repository": "${{ github.repository }}",
-              "run_id": "${{ github.run_id }}",
-              "hash": "${{ steps.get_branch.outputs.sha }}"
-            }
+          data: '{"single_zip":"1","domain":"nizumi4.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ steps.get_branch.outputs.sha }}"}'
           
   #for Push
   pushed_build:
@@ -84,7 +74,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '18.x'
       - name: CI Cache
         uses: actions/cache@v4
         id: node_modules_cache_id
@@ -100,7 +90,7 @@ jobs:
       - name: Generate
         run: npm run generate
       - name: Zip artifact for upload
-        run: zip -r dist.zip out
+        run: cd ./.output/public && zip ../../dist.zip . -r
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -112,11 +102,4 @@ jobs:
         env:
           webhook_url: "https://nizumi4.g.kuroco.app/direct/menu/github/"
           webhook_secret: "29680b1acbfc05837863f84cb6f7e7fd"
-          data: >
-            {
-              "single_zip": "1",
-              "domain": "nizumi4.g.kuroco-front.app",
-              "repository": "${{ github.repository }}",
-              "run_id": "${{ github.run_id }}",
-              "hash": "${{ github.sha }}"
-            }
+          data: '{"single_zip":"1","domain":"nizumi4.g.kuroco-front.app", "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
