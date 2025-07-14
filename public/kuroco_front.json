@@ -1,7 +1,12 @@
 {
   "basic": [],
   "redirects": [],
-  "rewrites": [],
+  "rewrites": [
+    {
+      "source": ".*",
+      "destination": "/index.html"
+    }
+  ],
   "error_page": {
     "status404": "/404.html"
   }
